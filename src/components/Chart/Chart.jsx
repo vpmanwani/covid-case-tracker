@@ -1,60 +1,68 @@
-import React, { useState, useEffect } from 'react';
-import { fetchDailyData } from '../../api';
+import React from 'react';
+//import { fetchDailyGlobalData } from '../../api';
 import { Line, Bar } from 'react-chartjs-2';
-import styles from './Chart.module.css';
 
-const Chart = ({ data: { confirmed, deaths, recovered }, country }) => {
-    const [dailyData, setDailyData] = useState({});
-
-    useEffect(() => {
-        const fetchAPI = async () => {
-            setDailyData(await fetchDailyData());
-        };
-        fetchAPI();
-    }, []);
-
+const Chart = ({ data, dateWiseData ,country }) => {
     const barChart = (
-        confirmed ? (
+        data.confirmed ? (
                 <Bar
                     data={{
                         labels: ['Infected', 'Recovered', 'Deaths'],
                         datasets: [{
                             label: 'People',
                             backgroundColor: ['rgba(0, 0, 255, 0.5)', 'rgba(0, 255, 0, 0.5)', 'rgba(255, 0, 0, 0.5)'],
-                            data: [confirmed.value, recovered.value, deaths.value]
+                            data: [data.confirmed, data.recovered, data.deaths]
                         }],
                     }}
                     options={{
                         legend: { display: false },
-                        title: { display: true, text: `Current state in ${country}` }
+                        title: { display: true, text: `${country.toUpperCase()}` }
                     }}
                 />
             ) : null
     );
 
     const lineChart = (
-        dailyData.length? (<Line data={{
-            labels: dailyData.map(({ date }) => date),
+        dateWiseData.length? (<Line data={{
+            labels: dateWiseData.map(({ Date }) => Date),
             datasets: [{
-                data: dailyData.map(({ confirmed }) => confirmed),
+                data: dateWiseData.map(({ Confirmed }) => Confirmed),
                 label: 'Infected',
                 borderColor: '#3333ff',
                 fill: true
             }, {
-                data: dailyData.map(({ deaths }) => deaths),
+                data: dateWiseData.map(({ Recovered }) => Recovered),
+                label: 'Recovered',
+                borderColor: 'green',
+                fill: true
+            }, {
+                data: dateWiseData.map(({ Deaths }) => Deaths),
                 label: 'Deaths',
                 borderColor: 'red',
-                backgroundColor: 'rgba(255, 0, 0, 0.5)',
                 fill: true
-            }],
-        }} />) : null
+            }, 
+            ],
+        }} 
+        options={{
+            title: { display: true, text: `Daily Cases` }
+        }}
+        />) : null
     );
 
-    return (
-        <div className={styles.container}>
-            {country ? barChart : lineChart}
-        </div>
-    );
-};
+        return (
+            <div className="bg-transparent clo-sm-12">
+                <div className="container-fluid">
+                    <div className="row justify-content-center">
+                        <div className="col-sm-12 bg-light col-md-6 border-all mt-2 mb-2 shadow-lg vertical-line">
+                            {barChart}
+                        </div>
+                        <div className="col-sm-12 bg-light col-md-6 border-all mt-2 mb-2 shadow-lg vertical-line">
+                            {lineChart}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        );
+}
 
 export default Chart;

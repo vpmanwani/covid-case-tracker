@@ -19,7 +19,14 @@
 }
 
 @media (max-width: 770px) {
+    .container {
+        display: flex;
+        margin-left: 25px;
+    }
+
     .card {
         margin: 2% 0 !important;
+        display: flex;
+        justify-content: center;
     }
 }

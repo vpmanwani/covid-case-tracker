@@ -11,7 +11,11 @@ body {
 
 .image {
     width: 370px;
-    margin-top: 50px;
+    margin: 50px 0;
+}
+
+.doughnut {
+    border: 5px solid red;
 }
 
 @media (max-width: 770px) {
