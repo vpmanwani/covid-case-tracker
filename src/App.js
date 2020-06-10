@@ -68,7 +68,7 @@ class App extends React.Component {
 
     render() {
         const { data, dateWiseData, country, CountryWiseData, globalTotalData } = this.state;
-        console.log(this.state);
+//         console.log(this.state);
         return (
             <div className="justify-content-center text-center align-content-center align-items-center">
                 <div className="justify-content-center align-items-center align-content-center text-center">
