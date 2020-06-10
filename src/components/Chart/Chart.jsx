@@ -22,6 +22,8 @@ const Chart = ({ data, dateWiseData ,country }) => {
             ) : null
     );
 
+    let showLegendBoolean = window.innerWidth < 400 ? false : true;
+
     const lineChart = (
         dateWiseData.length? (<Line data={{
             labels: dateWiseData.map(({ Date }) => Date),
@@ -44,6 +46,7 @@ const Chart = ({ data, dateWiseData ,country }) => {
             ],
         }} 
         options={{
+            legend: { display: showLegendBoolean },
             title: { display: true, text: `Daily Cases` }
         }}
         />) : null

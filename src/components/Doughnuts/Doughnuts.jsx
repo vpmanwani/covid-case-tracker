@@ -3,26 +3,41 @@ import { Doughnut } from 'react-chartjs-2';
 import colors from './colors'
 
 const Doughnuts = (props) => {
-    // console.log(props);
-    let Countries= [];
+    // slice top countries for each doughnut from the available
+    let Countries, topCountriesConfirmed, topCountriesDeaths, topCountriesRecovered = [];
     try{
         Countries = props.data;
-    }catch(error){}
-
-    // slice top countries for each doughnut from the available
-    let topCountriesConfirmed = [];
-    let topCountriesDeaths = [];
-    let topCountriesRecovered = [];
-    let showLegendBoolean = window.innerWidth < 400 ? false : true;
-    // let topCountriesActive = [];
-
-    //logic for slicing
-    try{
         topCountriesConfirmed = Countries.sort((a,b) => b.TotalConfirmed - a.TotalConfirmed).slice(0,10);
         topCountriesRecovered = Countries.sort((a,b) => b.TotalRecovered - a.TotalRecovered).slice(0,10);
         topCountriesDeaths = Countries.sort((a,b) => b.TotalDeaths - a.TotalDeaths).slice(0,10);
-        //topCountriesActive = Countries.sort((a,b) => b.TotalActive - a.TotalActive).slice(0,10);
-    } catch(error){}
+
+        let topSum = [];
+        topSum['confirmed'] = 0;
+        topSum['recovered'] = 0;
+        topSum['deaths'] = 0;
+        topSum['active'] = 0;
+        for (var i=0; i<10; i++){
+            topSum['confirmed'] += topCountriesConfirmed[i].TotalConfirmed;
+            topSum['recovered'] += topCountriesRecovered[i].TotalRecovered;
+            topSum['deaths'] += topCountriesDeaths[i].TotalDeaths;
+        }
+
+        topCountriesConfirmed.push({
+            Country: 'Others',
+            TotalConfirmed: props.globalTotalData.confirmed - topSum['confirmed'],
+        });
+        topCountriesRecovered.push({
+            Country: 'Others',
+            TotalRecovered: props.globalTotalData.recovered - topSum['recovered'],
+        });
+        topCountriesDeaths.push({
+            Country: 'Others',
+            TotalDeaths: props.globalTotalData.deaths - topSum['deaths'],
+        });
+        
+    }catch(error){}
+
+    let showLegendBoolean = window.innerWidth < 400 ? false : true;
 
     return (
         <>
@@ -53,7 +68,7 @@ const Doughnuts = (props) => {
                         datasets: [{
                             label: "Recovered Covid-19 Cases in World",
                             data: topCountriesRecovered.map(({ TotalRecovered }) => TotalRecovered),
-                            backgroundColor: colors.slice(0,10),
+                            backgroundColor: colors.slice(10,20),
                             fill: true,
                         }],
                     }}

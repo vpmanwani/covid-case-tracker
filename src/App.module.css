@@ -2,6 +2,10 @@ body {
     background-color: rgb(250,250,250);
 }
 
+.message {
+    margin-bottom: 25px;
+}
+
 .container {
     display: flex;
     align-items: center;

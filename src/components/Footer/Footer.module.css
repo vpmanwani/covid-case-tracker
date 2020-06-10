@@ -1,0 +1,32 @@
+.footer {
+    margin-top: 30px;
+    background-color: #1e1e30;
+    padding: 5px 0;
+    color: white;
+}
+
+a.icon:link {
+    color: white;
+}
+a.icon:visited {
+    color: white;
+}
+
+.api {
+    color: #999999;
+    margin: 0 5px;
+}
+
+.api:hover{
+    color: #999999;
+}
+
+.icon {
+    margin-right: 15px;
+}
+
+@media (max-width: 770px) {
+    .api {
+        display: block;
+    }
+}
