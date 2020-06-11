@@ -7,11 +7,11 @@ const Chart = ({ data, dateWiseData ,country }) => {
         data.confirmed ? (
                 <Bar
                     data={{
-                        labels: ['Infected', 'Recovered', 'Deaths'],
+                        labels: ['Infected', 'Active', 'Recovered', 'Deaths'],
                         datasets: [{
                             label: 'People',
-                            backgroundColor: ['rgba(0, 0, 255, 0.5)', 'rgba(0, 255, 0, 0.5)', 'rgba(255, 0, 0, 0.5)'],
-                            data: [data.confirmed, data.recovered, data.deaths]
+                            backgroundColor: ['rgba(0, 0, 255, 0.5)', 'rgba(255, 255, 0, 0.5)', 'rgba(0, 255, 0, 0.5)', 'rgba(255, 0, 0, 0.5)'],
+                            data: [data.confirmed, data.confirmed - data.recovered - data.deaths, data.recovered, data.deaths, ],
                         }],
                     }}
                     options={{
@@ -26,7 +26,7 @@ const Chart = ({ data, dateWiseData ,country }) => {
 
     const lineChart = (
         dateWiseData.length? (<Line data={{
-            labels: dateWiseData.map(({ Date }) => Date),
+            labels: dateWiseData.map(({ Date }) => Date.slice(0,10)),
             datasets: [{
                 data: dateWiseData.map(({ Confirmed }) => Confirmed),
                 label: 'Infected',
