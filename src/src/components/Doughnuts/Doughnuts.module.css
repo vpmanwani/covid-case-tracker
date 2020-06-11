@@ -1,0 +1,15 @@
+.container {
+    display: flex;
+    height: 500px;
+}
+
+.doughnut {
+    border: 5px solid black;
+}
+
+
+@media (max-width: 770px) {
+    .container {
+        width: 100%;
+    }
+}

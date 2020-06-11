@@ -1,0 +1,12 @@
+.formControl {
+    justify-content: center;
+    width: 30%;
+    margin-bottom: 30px !important;
+    border: 5px solid red;
+}
+
+@media (max-width: 770px) {
+    .formControl {
+        width: 70%;
+    }
+}

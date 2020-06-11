@@ -1,0 +1,33 @@
+body {
+    background-color: rgb(250,250,250);
+}
+
+.message {
+    margin-bottom: 25px;
+}
+
+.container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.image {
+    width: 370px;
+    margin: 50px 0;
+}
+
+.doughnut {
+    border: 5px solid red;
+}
+
+@media (max-width: 770px) {
+    .container {
+        margin: 0 10%;
+    }
+
+    .image {
+        width: 100%;
+    }
+}
