@@ -1,3 +1,5 @@
+The website is live <a href="covid-case-tracker.netlify.com" target="_blank">here</a>.
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
